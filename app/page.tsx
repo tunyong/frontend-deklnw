@@ -1,19 +1,24 @@
 import Image from "next/image";
 
-// URL เว็บไซต์หลัก
-const WP_URL = "https://www.deklnw.com"; 
-// เปลี่ยนเป็น ID 324 ที่เราหาเจอ
+// URL หลัก (ระวังอย่าให้มีเครื่องหมาย / ต่อท้ายนะครับ)
+const WP_URL = "https://backend.deklnw.com"; 
+// ID ของหน้า
 const PAGE_ID = "6"; 
 
 async function getPageData() {
   try {
     const res = await fetch(`${WP_URL}/wp-json/wp/v2/pages/${PAGE_ID}`, {
-      next: { revalidate: 60 } // อัปเดตข้อมูลใหม่จาก WordPress ทุกๆ 60 วินาที
+      // ใช้คำสั่งนี้เพื่อบังคับให้ Next.js ไม่จำข้อมูลเก่า ดึงใหม่สดๆ ทุกครั้ง
+      cache: 'no-store' 
     });
-    if (!res.ok) return null;
+    
+    if (!res.ok) {
+      console.log("เชื่อมต่อ API ไม่สำเร็จ สถานะ:", res.status);
+      return null;
+    }
     return res.json();
   } catch (error) {
-    console.error("Error fetching data from WordPress", error);
+    console.error("ดึงข้อมูลจาก WordPress ไม่ได้:", error);
     return null;
   }
 }
@@ -22,7 +27,7 @@ export default async function SalePage() {
   const wpData = await getPageData();
   const shopeeLink = "https://s.shopee.co.th/4qBE3Td8JE";
 
-  // ดึงข้อความพาดหัว (Title) และ เนื้อหา (Content) จาก WordPress
+  // ดึงข้อความพาดหัว และ เนื้อหา จาก WordPress
   const headlineTitle = wpData?.title?.rendered || "🐱🚨 ทาสแมวต้องดู! ไอเทมลับที่สายแบกเจ้านายต้องมี💖";
   const mainContent = wpData?.content?.rendered || "<p>หมดปัญหาเจ้านายอึดอัด ร้องงอแงในกระเป๋าแคบๆ! จบปัญหาด้วย YTL เป้สัตว์เลี้ยงใบใหญ่จุใจ ✨</p>";
   
@@ -30,7 +35,7 @@ export default async function SalePage() {
     <main className="min-h-screen bg-sky-50 flex flex-col items-center justify-center p-4 font-sans text-gray-800">
       <div className="max-w-4xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden border border-sky-100">
         
-        {/* ส่วนหัวดึงมาจาก WordPress ทั้ง Title และ Content */}
+        {/* ส่วนหัวดึงมาจาก WordPress */}
         <div className="bg-[#5BC3B9] text-white text-center py-12 px-6">
           <h1 
             className="text-4xl md:text-6xl font-extrabold mb-5 leading-tight"
@@ -58,7 +63,7 @@ export default async function SalePage() {
           </p>
         </div>
 
-        {/* รายละเอียดเพิ่มเติมอื่นๆ */}
+        {/* ปุ่มสั่งซื้อ */}
         <div className="p-8 md:p-10 bg-white text-center">
           <div className="inline-block p-4 bg-orange-100 rounded-xl border border-orange-200 text-orange-900 font-medium mb-6">
             🔥 รีบสอยก่อนหมดโปร! ช่วงโปร Shopee กดโค้ดลดเพิ่มได้อีก คุ้มยิ่งกว่าคุ้ม!
