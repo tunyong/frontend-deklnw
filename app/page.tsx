@@ -3,7 +3,7 @@ import Image from "next/image";
 // URL หลัก (ระวังอย่าให้มีเครื่องหมาย / ต่อท้ายนะครับ)
 const WP_URL = "https://backend.deklnw.com"; 
 // ID ของหน้า
-const PAGE_ID = "6"; 
+const PAGE_ID = "11"; 
 
 async function getPageData() {
   try {
