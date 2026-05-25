@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://deklnw.com/sitemap.xml",
+    sitemap: "https://www.deklnw.com/sitemap.xml",
   };
 }

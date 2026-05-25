@@ -1,25 +1,12 @@
-const WP_URL = "https://backend.deklnw.com";
+import Link from "next/link";
+import { getPageById } from "@/lib/wordpress";
+
 const PAGE_ID = "6";
 
-async function getPageData() {
-  try {
-    const res = await fetch(`${WP_URL}/wp-json/wp/v2/pages/${PAGE_ID}`, {
-      cache: "no-store",
-    });
-
-    if (!res.ok) {
-      return null;
-    }
-
-    return res.json();
-  } catch (error) {
-    console.error("WordPress Fetch Error:", error);
-    return null;
-  }
-}
+export const dynamic = "force-dynamic";
 
 export default async function SalePage() {
-  const wpData = await getPageData();
+  const wpData = await getPageById(PAGE_ID);
 
   const shopeeLink = "https://s.shopee.co.th/4qBE3Td8JE";
 
@@ -31,25 +18,55 @@ export default async function SalePage() {
 
   return (
     <main className="min-h-screen bg-[#f5f7f6] text-gray-900">
-      {/* Top Bar */}
       <header className="sticky top-0 z-50 border-b border-white/60 bg-white/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-          <a href="/" className="text-lg font-black tracking-tight text-gray-950">
+          <Link href="/" className="text-lg font-black tracking-tight text-gray-950">
             DekLNW Deals
-          </a>
+          </Link>
+
+          <nav className="hidden items-center gap-3 md:flex">
+            <Link
+              href="/sale"
+              className="rounded-full px-4 py-2 text-sm font-bold text-gray-700 transition hover:bg-gray-100"
+            >
+              Sale Pages
+            </Link>
+
+            <Link
+              href="/blog"
+              className="rounded-full px-4 py-2 text-sm font-bold text-gray-700 transition hover:bg-gray-100"
+            >
+              Blog
+            </Link>
+
+            <Link
+              href="/products"
+              className="rounded-full px-4 py-2 text-sm font-bold text-gray-700 transition hover:bg-gray-100"
+            >
+              Products
+            </Link>
+
+            <a
+              href={shopeeLink}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="rounded-full bg-orange-500 px-5 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-orange-600"
+            >
+              ดูโปร Shopee
+            </a>
+          </nav>
 
           <a
             href={shopeeLink}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="rounded-full bg-orange-500 px-5 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-orange-600"
+            className="rounded-full bg-orange-500 px-4 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-orange-600 md:hidden"
           >
-            ดูโปร Shopee
+            Shopee
           </a>
         </div>
       </header>
 
-      {/* Hero */}
       <section className="mx-auto max-w-5xl px-4 pb-8 pt-10 md:pt-14">
         <div className="overflow-hidden rounded-[2rem] bg-gradient-to-br from-gray-950 via-gray-900 to-teal-950 p-6 text-white shadow-2xl md:p-10">
           <div className="mx-auto max-w-3xl text-center">
@@ -66,28 +83,41 @@ export default async function SalePage() {
               รวมสินค้าแนะนำ โปรดี ของน่าใช้ คัดมาให้อ่านง่าย กดดูราคาล่าสุดได้ทันที
             </p>
 
-            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               <a
                 href={shopeeLink}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="rounded-full bg-orange-500 px-8 py-4 text-lg font-black text-white shadow-lg transition hover:-translate-y-1 hover:bg-orange-600"
+                className="rounded-full bg-orange-500 px-6 py-4 text-base font-black text-white shadow-lg transition hover:-translate-y-1 hover:bg-orange-600"
               >
-                🛒 กดดูราคาล่าสุด
+                🛒 ดูโปร Shopee
               </a>
 
-              <a
-                href="/products"
-                className="rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-bold text-white transition hover:bg-white/15"
+              <Link
+                href="/sale"
+                className="rounded-full border border-white/20 bg-white/10 px-6 py-4 text-base font-bold text-white transition hover:bg-white/15"
               >
-                ดูสินค้าทั้งหมด
-              </a>
+                Sale Pages
+              </Link>
+
+              <Link
+                href="/blog"
+                className="rounded-full border border-white/20 bg-white/10 px-6 py-4 text-base font-bold text-white transition hover:bg-white/15"
+              >
+                Blog
+              </Link>
+
+              <Link
+                href="/products"
+                className="rounded-full border border-white/20 bg-white/10 px-6 py-4 text-base font-bold text-white transition hover:bg-white/15"
+              >
+                Products
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Content Card */}
       <section id="content" className="mx-auto max-w-5xl px-4 pb-28">
         <article className="overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-xl shadow-gray-200/60">
           <div
@@ -151,7 +181,6 @@ export default async function SalePage() {
             dangerouslySetInnerHTML={{ __html: mainContent }}
           />
 
-          {/* CTA Box */}
           <div className="border-t border-gray-100 bg-gradient-to-br from-orange-50 to-teal-50 px-6 py-10 text-center md:px-12">
             <p className="mb-3 text-sm font-black uppercase tracking-[0.25em] text-orange-600">
               Limited Deal
@@ -181,16 +210,38 @@ export default async function SalePage() {
         </article>
       </section>
 
-      {/* Mobile Sticky CTA */}
       <div className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-200 bg-white/95 p-3 shadow-2xl backdrop-blur md:hidden">
-        <a
-          href={shopeeLink}
-          target="_blank"
-          rel="noopener noreferrer sponsored"
-          className="flex w-full items-center justify-center rounded-full bg-orange-500 px-6 py-4 text-lg font-black text-white shadow-lg"
-        >
-          🛒 ดูโปร Shopee
-        </a>
+        <div className="grid grid-cols-4 gap-2">
+          <Link
+            href="/sale"
+            className="rounded-full bg-gray-100 px-2 py-3 text-center text-xs font-black text-gray-800"
+          >
+            Sale
+          </Link>
+
+          <Link
+            href="/blog"
+            className="rounded-full bg-gray-100 px-2 py-3 text-center text-xs font-black text-gray-800"
+          >
+            Blog
+          </Link>
+
+          <Link
+            href="/products"
+            className="rounded-full bg-gray-100 px-2 py-3 text-center text-xs font-black text-gray-800"
+          >
+            Product
+          </Link>
+
+          <a
+            href={shopeeLink}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="rounded-full bg-orange-500 px-2 py-3 text-center text-xs font-black text-white"
+          >
+            Shopee
+          </a>
+        </div>
       </div>
     </main>
   );
