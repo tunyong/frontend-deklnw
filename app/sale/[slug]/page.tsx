@@ -38,46 +38,36 @@ export default async function SaleDetailPage({ params }: SalePageProps) {
   const content = page.content?.rendered || "";
 
   return (
-    <main className="min-h-screen bg-[#f5f7f6] text-gray-900">
-      <header className="sticky top-0 z-50 border-b border-white/60 bg-white/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-          <Link href="/" className="text-lg font-black tracking-tight text-gray-950">
-            DekLNW Deals
+    <main className="min-h-screen bg-[#f6f7f8] text-gray-900">
+      <header className="border-b border-gray-100 bg-white">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
+          <Link href="/sale" className="font-black text-gray-950">
+            ← กลับไปหน้า Sale Pages
           </Link>
 
           <Link
-            href="/sale"
-            className="rounded-full bg-gray-950 px-5 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-orange-600"
+            href="/"
+            className="rounded-full border border-gray-200 px-4 py-2 text-sm font-bold text-gray-900 transition hover:bg-gray-50"
           >
-            Sale Pages
+            หน้าแรก
           </Link>
         </div>
       </header>
 
-      <section className="mx-auto max-w-5xl px-4 pb-8 pt-10 md:pt-14">
-        <div className="overflow-hidden rounded-[2rem] bg-gradient-to-br from-gray-950 via-gray-900 to-teal-950 p-6 text-white shadow-2xl md:p-10">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-5 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-teal-100">
-              WordPress Sale Page
-            </p>
-
-            <h1
-              className="text-3xl font-black leading-tight md:text-5xl"
-              dangerouslySetInnerHTML={{ __html: title }}
-            />
-
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-gray-200 md:text-lg">
-              หน้า Sale Page นี้ดึงข้อมูลจาก WordPress อัตโนมัติ
-            </p>
-          </div>
+      <section className="mx-auto max-w-5xl px-4 pt-8">
+        <div className="rounded-[32px] border border-gray-100 bg-white px-6 py-8 shadow-sm md:px-10 md:py-12">
+          <h1
+            className="text-3xl font-black leading-tight text-gray-950 md:text-5xl"
+            dangerouslySetInnerHTML={{ __html: title }}
+          />
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 pb-28">
-        <article className="overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-xl shadow-gray-200/60">
+      <section className="mx-auto max-w-5xl px-4 pb-20 pt-8">
+        <article className="overflow-hidden rounded-[32px] border border-gray-100 bg-white shadow-sm">
           <div
             className="
-              wp-content px-6 py-8 text-lg leading-8 text-gray-700 md:px-12 md:py-12
+              wp-content px-6 py-8 text-base leading-8 text-gray-700 md:px-12 md:py-12 md:text-lg
               [&_p]:mb-6
               [&_strong]:font-black
               [&_strong]:text-gray-950
@@ -99,7 +89,7 @@ export default async function SaleDetailPage({ params }: SalePageProps) {
               [&_ol]:pl-6
               [&_li]:mb-2
               [&_a]:font-bold
-              [&_a]:text-teal-700
+              [&_a]:text-orange-600
               [&_a]:underline
               [&_img]:mx-auto
               [&_img]:mb-8
@@ -108,7 +98,7 @@ export default async function SaleDetailPage({ params }: SalePageProps) {
               [&_img]:w-auto
               [&_img]:max-w-full
               [&_img]:rounded-3xl
-              [&_img]:shadow-lg
+              [&_img]:shadow-sm
               [&_figure]:mx-auto
               [&_figure]:mb-8
               [&_figure]:w-full

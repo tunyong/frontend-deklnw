@@ -45,10 +45,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const affiliateUrl = getWooProductLink(product);
   const shortDescription = stripHtml(product.short_description || "");
   const fullDescription = product.description || "";
+  const categories =
+    product.categories?.map((category) => category.name).join(" • ") || "";
 
   return (
-    <main className="min-h-screen bg-[#f5f7f6] px-4 py-8 text-gray-900">
-      <div className="mx-auto max-w-5xl">
+    <main className="min-h-screen bg-[#f6f7f8] px-4 py-8 text-gray-900">
+      <div className="mx-auto max-w-6xl">
         <header className="mb-6 flex items-center justify-between">
           <Link href="/products" className="font-black text-gray-950">
             ← กลับไปหน้าสินค้า
@@ -56,52 +58,54 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
           <Link
             href="/"
-            className="rounded-full bg-white px-4 py-2 text-sm font-bold shadow-sm"
+            className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-bold text-gray-900 transition hover:bg-gray-50"
           >
             หน้าแรก
           </Link>
         </header>
 
-        <section className="overflow-hidden rounded-[2rem] bg-white shadow-2xl shadow-gray-200/70">
-          <div className="grid gap-0 md:grid-cols-2">
-            <div className="relative flex min-h-[360px] items-center justify-center bg-gray-100">
+        <section className="overflow-hidden rounded-[32px] border border-gray-100 bg-white shadow-sm">
+          <div className="grid md:grid-cols-2">
+            <div className="relative bg-gray-100">
               {image ? (
                 <img
                   src={image}
                   alt={product.images?.[0]?.alt || product.name}
-                  className="h-full max-h-[560px] w-full object-cover"
+                  className="h-full min-h-[320px] w-full object-cover"
                 />
               ) : (
-                <div className="text-center">
-                  <p className="text-6xl">🛒</p>
-                  <p className="mt-4 font-black text-gray-400">No Image</p>
+                <div className="flex min-h-[320px] items-center justify-center">
+                  <div className="text-center text-gray-400">
+                    <p className="text-5xl">🛒</p>
+                    <p className="mt-3 font-semibold">No Image</p>
+                  </div>
                 </div>
               )}
 
               {product.on_sale && (
-                <div className="absolute left-5 top-5 rounded-full bg-orange-500 px-4 py-2 text-sm font-black text-white shadow-lg">
+                <div className="absolute left-5 top-5 rounded-full bg-orange-500 px-3 py-1.5 text-xs font-bold text-white shadow-sm">
                   Sale
                 </div>
               )}
             </div>
 
             <div className="p-6 md:p-10">
-              <p className="mb-4 inline-flex rounded-full bg-teal-50 px-4 py-2 text-sm font-bold text-teal-700">
-                WooCommerce / Affiliate Product
-              </p>
+              {categories && (
+                <p className="text-sm font-medium text-gray-500">{categories}</p>
+              )}
 
-              <h1 className="text-3xl font-black leading-tight text-gray-950 md:text-5xl">
+              <h1 className="mt-2 text-3xl font-black leading-tight text-gray-950 md:text-5xl">
                 {product.name}
               </h1>
 
               {shortDescription && (
-                <p className="mt-5 text-lg leading-8 text-gray-600">
+                <p className="mt-5 text-base leading-8 text-gray-600 md:text-lg">
                   {shortDescription}
                 </p>
               )}
 
               <div className="mt-6">
-                <p className="text-3xl font-black text-orange-600">{price}</p>
+                <p className="text-3xl font-black text-orange-500">{price}</p>
               </div>
 
               <div className="mt-8 grid gap-3">
@@ -109,16 +113,16 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   href={affiliateUrl}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  className="rounded-full bg-orange-500 px-8 py-4 text-center text-lg font-black text-white shadow-lg transition hover:-translate-y-1 hover:bg-orange-600"
+                  className="inline-flex items-center justify-center rounded-full bg-orange-500 px-8 py-4 text-base font-bold text-white transition hover:bg-orange-600"
                 >
-                  🛒 ดูราคาล่าสุด / สั่งซื้อ
+                  ดูราคาล่าสุด / สั่งซื้อ
                 </a>
 
                 <Link
                   href="/products"
-                  className="rounded-full border border-gray-200 px-8 py-4 text-center text-lg font-bold text-gray-800 transition hover:bg-gray-50"
+                  className="inline-flex items-center justify-center rounded-full border border-gray-200 px-8 py-4 text-base font-bold text-gray-900 transition hover:bg-gray-50"
                 >
-                  ดูสินค้าอื่น ๆ
+                  ดูสินค้าอื่น
                 </Link>
               </div>
 
@@ -136,7 +140,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             {fullDescription ? (
               <div
                 className="
-                  wp-content mt-5 text-lg leading-8 text-gray-700
+                  wp-content mt-5 text-base leading-8 text-gray-700 md:text-lg
                   [&_p]:mb-6
                   [&_strong]:font-black
                   [&_strong]:text-gray-950
@@ -161,7 +165,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   [&_img]:h-auto
                   [&_img]:max-w-full
                   [&_img]:rounded-3xl
-                  [&_img]:shadow-lg
+                  [&_img]:shadow-sm
                 "
                 dangerouslySetInnerHTML={{ __html: fullDescription }}
               />

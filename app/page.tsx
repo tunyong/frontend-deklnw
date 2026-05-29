@@ -20,40 +20,37 @@ export default async function HomePage() {
     wpData?.content?.rendered || "<p>กำลังโหลดเนื้อหาจาก WordPress...</p>";
 
   return (
-    <main className="min-h-screen bg-[#f5f7f6] text-gray-900">
-      <header className="sticky top-0 z-50 border-b border-white/60 bg-white/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+    <main className="min-h-screen bg-[#f6f7f8] text-gray-900">
+      <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
           <Link href="/" className="text-lg font-black tracking-tight text-gray-950">
             DekLNW Deals
           </Link>
 
           <nav className="hidden items-center gap-3 md:flex">
             <Link
-              href="/sale"
-              className="rounded-full px-4 py-2 text-sm font-bold text-gray-700 transition hover:bg-gray-100"
-            >
-              Sale Pages
-            </Link>
-
-            <Link
-              href="/blog"
-              className="rounded-full px-4 py-2 text-sm font-bold text-gray-700 transition hover:bg-gray-100"
-            >
-              Blog
-            </Link>
-
-            <Link
               href="/products"
-              className="rounded-full px-4 py-2 text-sm font-bold text-gray-700 transition hover:bg-gray-100"
+              className="rounded-full px-4 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-100"
             >
               Products
             </Link>
-
+            <Link
+              href="/sale"
+              className="rounded-full px-4 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-100"
+            >
+              Sale Pages
+            </Link>
+            <Link
+              href="/blog"
+              className="rounded-full px-4 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-100"
+            >
+              Blog
+            </Link>
             <a
               href={shopeeLink}
               target="_blank"
               rel="noopener noreferrer sponsored"
-              className="rounded-full bg-orange-500 px-5 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-orange-600"
+              className="rounded-full bg-orange-500 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-orange-600"
             >
               ดูโปร Shopee
             </a>
@@ -63,56 +60,52 @@ export default async function HomePage() {
             href={shopeeLink}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="rounded-full bg-orange-500 px-4 py-2 text-sm font-bold text-white shadow-sm transition hover:bg-orange-600 md:hidden"
+            className="rounded-full bg-orange-500 px-4 py-2 text-sm font-bold text-white md:hidden"
           >
             Shopee
           </a>
         </div>
       </header>
 
-      <section className="mx-auto max-w-5xl px-4 pb-8 pt-10 md:pt-14">
-        <div className="overflow-hidden rounded-[2rem] bg-gradient-to-br from-gray-950 via-gray-900 to-teal-950 p-6 text-white shadow-2xl md:p-10">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-5 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-bold text-teal-100">
-              WooCommerce Affiliate Landing Page
-            </p>
-
+      <section className="mx-auto max-w-6xl px-4 pt-8 md:pt-10">
+        <div className="rounded-[32px] border border-gray-100 bg-white px-6 py-8 shadow-sm md:px-10 md:py-12">
+          <div className="max-w-3xl">
             <h1
-              className="text-3xl font-black leading-tight md:text-5xl"
+              className="text-3xl font-black leading-tight text-gray-950 md:text-5xl"
               dangerouslySetInnerHTML={{ __html: headlineTitle }}
             />
 
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-gray-200 md:text-lg">
-              รวมสินค้าแนะนำ โปรดี ของน่าใช้ คัดมาให้อ่านง่าย กดดูราคาล่าสุดได้ทันที
+            <p className="mt-4 max-w-2xl text-base leading-8 text-gray-600 md:text-lg">
+              รวมสินค้าแนะนำ โปรดี ของน่าใช้ ดูง่าย อ่านง่าย และกดเช็กราคาล่าสุดได้ทันที
             </p>
 
-            <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={shopeeLink}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="rounded-full bg-orange-500 px-6 py-4 text-base font-black text-white shadow-lg transition hover:-translate-y-1 hover:bg-orange-600"
+                className="rounded-full bg-orange-500 px-6 py-3 text-sm font-bold text-white transition hover:bg-orange-600"
               >
-                🛒 ดูโปร Shopee
+                ดูโปร Shopee
               </a>
 
               <Link
                 href="/products"
-                className="rounded-full border border-white/20 bg-white/10 px-6 py-4 text-base font-bold text-white transition hover:bg-white/15"
+                className="rounded-full border border-gray-200 px-6 py-3 text-sm font-bold text-gray-900 transition hover:bg-gray-50"
               >
                 Products
               </Link>
 
               <Link
                 href="/sale"
-                className="rounded-full border border-white/20 bg-white/10 px-6 py-4 text-base font-bold text-white transition hover:bg-white/15"
+                className="rounded-full border border-gray-200 px-6 py-3 text-sm font-bold text-gray-900 transition hover:bg-gray-50"
               >
                 Sale Pages
               </Link>
 
               <Link
                 href="/blog"
-                className="rounded-full border border-white/20 bg-white/10 px-6 py-4 text-base font-bold text-white transition hover:bg-white/15"
+                className="rounded-full border border-gray-200 px-6 py-3 text-sm font-bold text-gray-900 transition hover:bg-gray-50"
               >
                 Blog
               </Link>
@@ -122,23 +115,22 @@ export default async function HomePage() {
       </section>
 
       {featuredProducts.length > 0 && (
-        <section className="mx-auto max-w-6xl px-4 pb-10">
+        <section className="mx-auto max-w-6xl px-4 pt-10">
           <div className="mb-6 flex items-end justify-between gap-4">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.25em] text-orange-600">
-                Featured Products
-              </p>
-
-              <h2 className="mt-2 text-3xl font-black text-gray-950">
-                สินค้าแนะนำสำหรับหน้า Landing Page
+              <h2 className="text-2xl font-black text-gray-950 md:text-3xl">
+                สินค้าแนะนำ
               </h2>
+              <p className="mt-2 text-sm text-gray-600">
+                สินค้าที่คุณเลือกเป็น Featured ใน WooCommerce
+              </p>
             </div>
 
             <Link
               href="/products"
-              className="hidden rounded-full bg-white px-5 py-3 text-sm font-black text-gray-800 shadow-sm transition hover:bg-gray-50 md:inline-flex"
+              className="hidden rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-bold text-gray-900 transition hover:bg-gray-50 md:inline-flex"
             >
-              ดูทั้งหมด
+              ดูสินค้าทั้งหมด
             </Link>
           </div>
 
@@ -150,11 +142,11 @@ export default async function HomePage() {
         </section>
       )}
 
-      <section id="content" className="mx-auto max-w-5xl px-4 pb-28">
-        <article className="overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-xl shadow-gray-200/60">
+      <section className="mx-auto max-w-5xl px-4 pb-28 pt-10">
+        <article className="overflow-hidden rounded-[32px] border border-gray-100 bg-white shadow-sm">
           <div
             className="
-              wp-content px-6 py-8 text-lg leading-8 text-gray-700 md:px-12 md:py-12
+              wp-content px-6 py-8 text-base leading-8 text-gray-700 md:px-12 md:py-12 md:text-lg
               [&_p]:mb-6
               [&_strong]:font-black
               [&_strong]:text-gray-950
@@ -177,7 +169,7 @@ export default async function HomePage() {
               [&_ol]:pl-6
               [&_li]:mb-2
               [&_a]:font-bold
-              [&_a]:text-teal-700
+              [&_a]:text-orange-600
               [&_a]:underline
               [&_img]:mx-auto
               [&_img]:mb-8
@@ -186,7 +178,7 @@ export default async function HomePage() {
               [&_img]:w-auto
               [&_img]:max-w-full
               [&_img]:rounded-3xl
-              [&_img]:shadow-lg
+              [&_img]:shadow-sm
               [&_figure]:mx-auto
               [&_figure]:mb-8
               [&_figure]:w-full
@@ -205,25 +197,25 @@ export default async function HomePage() {
         </article>
       </section>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-200 bg-white/95 p-3 shadow-2xl backdrop-blur md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-200 bg-white/95 p-3 backdrop-blur md:hidden">
         <div className="grid grid-cols-4 gap-2">
           <Link
             href="/products"
-            className="rounded-full bg-gray-100 px-2 py-3 text-center text-xs font-black text-gray-800"
+            className="rounded-full bg-gray-100 px-2 py-3 text-center text-xs font-bold text-gray-800"
           >
-            Product
+            Products
           </Link>
 
           <Link
             href="/sale"
-            className="rounded-full bg-gray-100 px-2 py-3 text-center text-xs font-black text-gray-800"
+            className="rounded-full bg-gray-100 px-2 py-3 text-center text-xs font-bold text-gray-800"
           >
             Sale
           </Link>
 
           <Link
             href="/blog"
-            className="rounded-full bg-gray-100 px-2 py-3 text-center text-xs font-black text-gray-800"
+            className="rounded-full bg-gray-100 px-2 py-3 text-center text-xs font-bold text-gray-800"
           >
             Blog
           </Link>
@@ -232,7 +224,7 @@ export default async function HomePage() {
             href={shopeeLink}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="rounded-full bg-orange-500 px-2 py-3 text-center text-xs font-black text-white"
+            className="rounded-full bg-orange-500 px-2 py-3 text-center text-xs font-bold text-white"
           >
             Shopee
           </a>
